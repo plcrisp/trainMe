@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "449075073842",
+    "project_id": "trainme-fdb38",
+    "storage_bucket": "trainme-fdb38.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:449075073842:android:99a75cdc13dc00f6ce3d2b",
+        "android_client_info": {
+          "package_name": "com.example.academia"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYLkCZXTwPU5p46iUtXjIn8R9hZLznPos"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:449075073842:android:a549253eeb008640ce3d2b",
+        "android_client_info": {
+          "package_name": "com.pelu.samu.trainme"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYLkCZXTwPU5p46iUtXjIn8R9hZLznPos"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

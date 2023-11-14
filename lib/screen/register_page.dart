@@ -3,19 +3,26 @@ import 'package:academia/componentes/my_text_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatefulWidget {
-  final VoidCallback showRegisterPage;
-  LoginPage({super.key, required this.showRegisterPage});
+class RegisterPage extends StatefulWidget {
+  final VoidCallback showLoginPage;
+  RegisterPage({
+    super.key,
+    required this.showLoginPage,
+  });
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   //text editing controllers
+  final usernameController = TextEditingController();
+
   final emailController = TextEditingController();
 
   final passwordController = TextEditingController();
+
+  final confirmPasswordController = TextEditingController();
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -47,27 +54,71 @@ class _LoginPageState extends State<LoginPage> {
     };
   }
 
+  //valide confirm password
+
+  String? Function(String?) validatorConfirmPassword(String _controller) {
+    return (String? _controller) {
+      if (_controller == null || _controller.isEmpty) {
+        return "Senha necessária";
+      } else if (!passwordConfirmed()) {
+        return "Senha diferente";
+      } else {
+        return null;
+      }
+    };
+  }
+
+  //valide username
+  String? Function(String?) validatorUsername(String _controller) {
+    return (String? _controller) {
+      if (_controller == null || _controller.isEmpty) {
+        return "nome de usuário necessário";
+      } else if (!RegExp(r'[a-z A-Z]').hasMatch(_controller)) {
+        return "Formato de e-mail inválido";
+      } else {
+        return null;
+      }
+    };
+  }
+
   //sign user function
-  Future signIn() async {
+  Future signUp() async {
     //loading page
     showDialog(
-        context: context,
-        builder: (context) => Center(
-              child: CircularProgressIndicator(),
-            ));
+      context: context,
+      builder: (context) => Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
 
     if (formKey.currentState!.validate()) {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
+      UserCredential userCredential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: emailController.text.trim(),
         password: passwordController.text.trim(),
       );
+
+      User? user = userCredential.user;
+      await user?.updateDisplayName(usernameController.text.trim());
+      await user?.reload();
+    }
+  }
+
+  bool passwordConfirmed() {
+    if (passwordController.text.trim() ==
+        confirmPasswordController.text.trim()) {
+      return true;
+    } else {
+      return false;
     }
   }
 
   @override
   void dispose() {
+    usernameController.dispose();
     emailController.dispose();
     passwordController.dispose();
+    confirmPasswordController.dispose();
     super.dispose();
   }
 
@@ -90,20 +141,28 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(height: 50),
                   //welcome back
                   Text(
-                    'Bem vindo de volta!',
+                    'Seja bem vindo!',
                     style: TextStyle(
                       color: Colors.grey[600],
                       fontSize: 16,
                     ),
                   ),
                   const SizedBox(height: 25),
-
-                  //username
+                  //email
                   MyTextField(
                     controller: emailController,
-                    hintText: 'E-mail',
+                    hintText: 'Email',
                     obscureText: false,
                     validator: validatorEmail(emailController.text.trim()),
+                  ),
+                  const SizedBox(height: 25),
+                  //username
+                  MyTextField(
+                    controller: usernameController,
+                    hintText: 'Nome de Usuário',
+                    obscureText: false,
+                    validator:
+                        validatorUsername(usernameController.text.trim()),
                   ),
                   const SizedBox(height: 25),
                   //password
@@ -114,30 +173,21 @@ class _LoginPageState extends State<LoginPage> {
                     validator:
                         validatorPassword(passwordController.text.trim()),
                   ),
-                  const SizedBox(height: 10),
-                  //forgot password
-
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Text(
-                          'Esqueceu a Senha?',
-                          style: TextStyle(
-                            color: Colors.grey[600],
-                            fontSize: 14,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
                   const SizedBox(height: 25),
+                  //confirm password
+                  MyTextField(
+                    controller: confirmPasswordController,
+                    hintText: 'Confirme a Senha',
+                    obscureText: true,
+                    validator: validatorConfirmPassword(
+                        confirmPasswordController.text.trim()),
+                  ),
+                  const SizedBox(height: 10),
 
                   //sign in button
                   Button(
-                    onTap: signIn,
-                    text: "Sign in",
+                    onTap: signUp,
+                    text: 'Register',
                   ),
                   const SizedBox(height: 50),
                   //register now
@@ -153,7 +203,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10),
-                          child: Text('Register',
+                          child: Text('Já possui conta?',
                               style: TextStyle(color: Colors.grey[700])),
                         ),
                         Expanded(
@@ -169,13 +219,13 @@ class _LoginPageState extends State<LoginPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('Não tem uma conta?',
+                      Text('Já sou um mebro',
                           style: TextStyle(color: Colors.grey[600])),
                       const SizedBox(width: 4),
                       GestureDetector(
-                        onTap: widget.showRegisterPage,
+                        onTap: widget.showLoginPage,
                         child: const Text(
-                          'Registre-se agora!',
+                          'Entre agora!',
                           style: TextStyle(
                             color: Colors.blue,
                             fontWeight: FontWeight.bold,
