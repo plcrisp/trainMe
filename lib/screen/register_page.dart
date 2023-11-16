@@ -1,5 +1,7 @@
 import 'package:academia/componentes/button.dart';
 import 'package:academia/componentes/my_text_field.dart';
+import 'package:academia/screen/train_me_page.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -26,6 +28,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
+  CollectionReference users = FirebaseFirestore.instance.collection('users');
   //validator email
   String? Function(String?) validatorEmail(String _controller) {
     return (String? _controller) {
@@ -92,16 +95,21 @@ class _RegisterPageState extends State<RegisterPage> {
     );
 
     if (formKey.currentState!.validate()) {
-      UserCredential userCredential =
-          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      await users.add({
+        'username': usernameController.text.trim(),
+        'email': emailController.text.trim(),
+        'password': passwordController.text.trim(),
+      });
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: emailController.text.trim(),
         password: passwordController.text.trim(),
       );
-
-      User? user = userCredential.user;
-      await user?.updateDisplayName(usernameController.text.trim());
-      await user?.reload();
     }
+    Navigator.of(context).pop();
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => TrainMe()),
+    );
   }
 
   bool passwordConfirmed() {

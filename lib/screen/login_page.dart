@@ -1,5 +1,6 @@
 import 'package:academia/componentes/button.dart';
 import 'package:academia/componentes/my_text_field.dart';
+import 'package:academia/screen/train_me_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -62,6 +63,8 @@ class _LoginPageState extends State<LoginPage> {
         password: passwordController.text.trim(),
       );
     }
+    Navigator.of(context).pop();
+    Navigator.push(context, MaterialPageRoute(builder: (context) => TrainMe()));
   }
 
   @override
