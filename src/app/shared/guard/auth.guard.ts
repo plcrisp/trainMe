@@ -25,12 +25,16 @@ export class AuthGuard {
     this.authService.isAdmin();
 
     let userDB: any;
-    let user = JSON.parse(localStorage.getItem("user")!);
+    let user: any;
+    if(localStorage.getItem("user") != null){
+      user = JSON.parse(localStorage.getItem("user")!);
+    }
 
-    return this.userService.getUser(user.uid).pipe(
+    console.log(user);
+
+    return this.afs.doc(`users/${user.uid}`).get().pipe(
       map(user => {
         userDB = user.data();
-
         if (this.authService.isLoggedIn === false || userDB.admUser === false) {
           this.router.navigate(['sign-in']);
           return false;

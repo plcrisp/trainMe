@@ -23,14 +23,11 @@ export class AuthService {
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     public router: Router,
     public ngZone: NgZone // NgZone service to remove outside scope warning
-  ) {  }
-
-  userRegistration() {
-
-    this.afAuth.authState.subscribe((user) => {
+  ) {  
+    this.afAuth.authState.subscribe(async (user) => {
       if (user) {
         this.userData = user;
-        this.getUserData(this.userData.uid).then((users) => {
+        await this.getUserData(this.userData.uid).then((users) => {
           users.forEach((user) => {
             localStorage.setItem('user', JSON.stringify(user.data()));
           });
@@ -38,13 +35,12 @@ export class AuthService {
       }
     });
   }
-
   // Sign in with email/password
   SignIn(email: string, password: string) {
-    this.userRegistration();
     return this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
+        localStorage.setItem('user', JSON.stringify(result.user));
         this.afAuth.authState.subscribe((user) => {
           if (user) {
             this.router.navigate(['dashboard']);

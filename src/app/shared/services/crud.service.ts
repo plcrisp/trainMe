@@ -4,6 +4,7 @@ import {
   AngularFireDatabase,
   AngularFireList,
   AngularFireObject,
+  snapshotChanges,
 } from '@angular/fire/compat/database';
 
 import {
@@ -31,8 +32,7 @@ export class CrudService {
 
   // Fetch exercise List
   GetAllExercises() {
-    const docRef = this.afs.collection('exercises');
-    return docRef.get();
+    return this.afs.collection("exercises").snapshotChanges();
   }
 
 
