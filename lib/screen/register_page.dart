@@ -18,7 +18,7 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   //text editing controllers
-  final usernameController = TextEditingController();
+  final displayNameController = TextEditingController();
 
   final emailController = TextEditingController();
 
@@ -28,7 +28,6 @@ class _RegisterPageState extends State<RegisterPage> {
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  CollectionReference users = FirebaseFirestore.instance.collection('users');
   //validator email
   String? Function(String?) validatorEmail(String _controller) {
     return (String? _controller) {
@@ -95,16 +94,16 @@ class _RegisterPageState extends State<RegisterPage> {
     );
 
     if (formKey.currentState!.validate()) {
-      await users.add({
-        'username': usernameController.text.trim(),
-        'email': emailController.text.trim(),
-        'password': passwordController.text.trim(),
-      });
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      UserCredential credential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: emailController.text.trim(),
         password: passwordController.text.trim(),
       );
+      await credential.user
+          ?.updateDisplayName(displayNameController.text.trim());
+      await credential.user?.reload();
     }
+
     Navigator.of(context).pop();
     Navigator.push(
       context,
@@ -112,6 +111,9 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
+  //data user
+
+  //password confirmed
   bool passwordConfirmed() {
     if (passwordController.text.trim() ==
         confirmPasswordController.text.trim()) {
@@ -123,7 +125,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   void dispose() {
-    usernameController.dispose();
+    displayNameController.dispose();
     emailController.dispose();
     passwordController.dispose();
     confirmPasswordController.dispose();
@@ -166,11 +168,11 @@ class _RegisterPageState extends State<RegisterPage> {
                   const SizedBox(height: 25),
                   //username
                   MyTextField(
-                    controller: usernameController,
+                    controller: displayNameController,
                     hintText: 'Nome de Usuário',
                     obscureText: false,
                     validator:
-                        validatorUsername(usernameController.text.trim()),
+                        validatorUsername(displayNameController.text.trim()),
                   ),
                   const SizedBox(height: 25),
                   //password
