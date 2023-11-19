@@ -1,4 +1,5 @@
 import 'package:academia/auth/auth_page.dart';
+import 'package:academia/componentes/MySearchDelegate.dart';
 import 'package:academia/screen/exercises.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -39,9 +40,19 @@ class _TrainMeState extends State<TrainMe> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Train Me'),
+        title: const Text('Train me'),
         backgroundColor: Color.fromRGBO(28, 43, 69, 1),
         elevation: 2,
+        actions: currentIndex == 1
+            ? <Widget>[
+                IconButton(
+                  icon: Icon(Icons.search),
+                  onPressed: () {
+                    showSearch(context: context, delegate: MySearchDelegate());
+                  },
+                ),
+              ]
+            : null,
       ),
       drawer: Drawer(
         child: Container(
