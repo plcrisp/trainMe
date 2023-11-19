@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../shared/services/auth.service';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 @Component({
   selector: 'app-sign-in',

@@ -1,25 +1,25 @@
 <!-- Top navigation -->
-<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-  <a class="navbar-brand col-sm-3 col-md-2 mr-0">
-    <img class="brand-logo" src="assets/gymlogo.png" alt="positronX.io Logo">
+<nav class="navbar navbar-dark fixed-top bg-dark p-0 shadow d-flex">
+  <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">
+    <img class="brand-logo" src="../../../assets/logo.jpg" alt="Logo">
+    <h1 class="navbar-brand flex-grow-1">Train Me</h1>
   </a>
 </nav>
-
 <!-- Sidebar navigation -->
 <div class="container-fluid">
   <div class="row">
 
-    <nav class="col-md-2 d-md-block bg-light sidebar">
+    <nav class="mainS col-md-2 d-md-block bg-light sidebar">
       <div class="sidebar-sticky">
         <ul class="nav flex-column">
           <li class="nav-item">
             <a class="nav-link" routerLink="/dashboard" routerLinkActive="active">
-              <i class="fas fa-user"></i>Exercícios
+              <i class="fa fa-child" aria-hidden="true"></i>Exercícios
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" routerLink="/register-exercise" routerLinkActive="active">
-              Adicionar Exercício
+              <i class="fa fa-plus" aria-hidden="true"></i>Adicionar Exercício
             </a>
           </li>
           <!-- Calling SignOut() Api from AuthService -->
@@ -33,30 +33,31 @@
     </nav>
 
     <!-- Main content -->
-    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <main role="main" class="mainS col-md-9 ml-sm-auto col-lg-10 px-4">
       <div class="inner-adjust">
 
         <table class="table">
           <thead>
           <tr>
-          <th scope="col">#</th>
           <th scope="col">Name</th>
-          <th scope="col">Email</th>
-          <th scope="col">Student Course</th>
-          <th scope="col">Fees</th>
-          <th scope="col">Action </th>
+          <th scope="col">Equipment</th>
+          <th scope="col">Primary Group</th>
+          <th scope="col">Secondary Group</th>
+          <th scope="col"></th>
           </tr>
           </thead>
           <tbody>
             <tr *ngFor="let exercise of Exercise; let i = index">
-              <th scope="row">{{ i + 1 }}</th>
               <td>{{ exercise.name }}</td>
               <td>{{ exercise.equipment }}</td>
               <td>{{ exercise.primaryGroup }}</td>
               <td>{{ exercise.secondaryGroup }}</td>
               <td>
-                <span (click)="removeExercise(exercise)" class="btn btn-danger">Delete</span> &nbsp;
-                <span routerLink="/update-student/{{exercise.eid}}" class="btn btn-primary">Edit</span>
+                <span routerLink="/update-student/{{exercise.eid}}" class="btnDash1 btn-primary">Edit</span>
+                <span (click)="removeExercise(exercise)" class="btnDash1 btn-link">
+                  <i class="fa fa-trash" aria-hidden="true"></i>
+                </span>
+                &nbsp;
               </td>
             </tr>
           </tbody>

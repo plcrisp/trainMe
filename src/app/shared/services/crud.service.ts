@@ -13,13 +13,18 @@ import {
   AngularFirestoreDocument,
 } from '@angular/fire/compat/firestore';
 
+import { Firestore, deleteDoc, doc, getFirestore } from 'firebase/firestore';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+
 @Injectable({
   providedIn: 'root',
 })
 export class CrudService {
   exerciseRef!: AngularFireObject<any>;
   exercises!: AngularFirestoreCollection<any>;
-  constructor(public afs: AngularFirestore,) {}
+  private db: Firestore;
+
+  constructor(public afs: AngularFirestore) { this.db = getFirestore(); }
 
 
 
@@ -70,10 +75,7 @@ export class CrudService {
     });
   }
 
-
-
-  DeleteExercise(eid: string) {
-    const exerciseRef = this.afs.collection('exercises').doc(eid);
-    return exerciseRef.delete();
+  async deleteExercise(eid: string) {
+    await deleteDoc(doc(this.db, 'exercises', eid));
   }
 }

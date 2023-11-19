@@ -30,8 +30,8 @@ export class DashboardComponent implements OnInit {
   
 
   removeExercise(Exercise){
-    if(confirm("Are you sure to delete "+ Exercise.name)){
-      this.crudService.DeleteExercise(Exercise);
+    if(confirm("Tem certeza que deseja deletar "+ Exercise.name)){
+      this.crudService.deleteExercise(Exercise.eid);
     }
   }
 }

@@ -81,21 +81,32 @@ h6 {
   height: 100%;
 }
 
+.logo{
+  width: 100px;
+  display: block;
+  clear: both;
+  margin: 0 auto 0px;
+}
+
 h3 {
   text-align: center;
   font-size: 22px;
   margin: 0 0 20px;
+  color: #ffffff;
 }
 
 .authBlock {
   margin: 0 auto;
   max-width: 400px;
-  background: white;
+  background: #1D2D47;
   border-radius: 10px;
   padding: 30px 40px 10px;
   overflow: hidden;
   -webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.9);
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.9);
+  p{
+    color: white;
+  }
 }
 
 label {
@@ -124,7 +135,7 @@ label {
   outline: none;
   font-size: 15px;
   color: #444444;
-  background: #fcfcfc;
+  background: #ffffff;
   border-radius: 10px;
 }
 
@@ -154,11 +165,17 @@ input:-moz-placeholder {
   font-size: 16px;
   font-weight: 600;
   padding: 15px 0;
-  background: #030027;
+  background: #129ac2;
   color: #ffffff;
   cursor: pointer;
   outline: none;
   border-radius: 10px;
+}
+
+.btnDash1{
+  color: #030027;
+  cursor: pointer;
+  margin-left: 30px;
 }
 
 .displayTable .btn:hover {
@@ -181,14 +198,14 @@ input:-moz-placeholder {
 .or {
   text-align: center;
   display: block;
-  color: #a0a0a0;
-  background: white;
+  color: #ffffff;
+  background: #1D2D47;
   position: relative;
   margin: 5px 0 0px;
 }
 
 .orInner {
-  background: white;
+  background: #1D2D47;
   display: inline-block;
   z-index: 4;
   position: relative;
@@ -225,7 +242,7 @@ input:-moz-placeholder {
 }
 
 .forgotPassword span {
-  color: #030027;
+  color: #a0a0a0;
   font-size: 14px;
   font-weight: 400;
   cursor: pointer;
@@ -239,7 +256,7 @@ input:-moz-placeholder {
   font-size: 14px;
   font-weight: 400;
   display: block;
-  color: #a0a0a0;
+  color: #ffffff;
   margin-bottom: 15px;
 }
 
@@ -257,7 +274,7 @@ input:-moz-placeholder {
   }
 
   .already{
-    color: #a0a0a0;
+    color: #ffffff;
   }
 }
 
@@ -265,12 +282,12 @@ input:-moz-placeholder {
 
 .redirectToLogin .redirect {
   cursor: pointer;
-  color: #030027;
+  color: #a0a0a0;
 }
 
 .redirectToLogin2 .redirect {
   cursor: pointer;
-  color: #030027;
+  color: #a0a0a0;
 }
 
 /* * Sidebar */
@@ -334,6 +351,10 @@ a:not([href]):not([tabindex]):hover {
   padding-top: 48px;
 }
 
+.mainS{
+  margin-top: 15px;
+}
+
 .dasboard-text {
   border-left: 1px solid rgb(255, 255, 255, 0.3);
   color: rgb(255, 255, 255, 0.5);
@@ -347,8 +368,13 @@ a:not([href]):not([tabindex]):hover {
 
 /* * Navbar */
 .navbar-brand {
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
+
+  h1 {
+    margin: 0;
+    font-size: 24px;
+    line-height: 1.5;
+    color: #fff;
+  }
 }
 
 .navbar .form-control {
@@ -356,6 +382,16 @@ a:not([href]):not([tabindex]):hover {
   border-width: 0;
   border-radius: 0;
 }
+
+.navbar {
+  display: inline;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+}
+
 
 .form-control-dark {
   color: #fff;
@@ -378,7 +414,7 @@ a:not([href]):not([tabindex]):hover {
 }
 
 .bg-dark {
-  background-color: #3f51b5 !important;
+  background-color: #1D2D47 !important;
 }
 
 .gap-right {
@@ -459,7 +495,7 @@ body .navbar-brand {
 }
 
 .brand-logo {
-  max-width: 25%;
+  max-width: 27%;
   margin-left: 10px;
 }
 
@@ -496,7 +532,7 @@ label {
 }
 
 [role="main"] {
-  padding-top: 65px;
+  padding-top: 75px;
 }
 
 .preloader {

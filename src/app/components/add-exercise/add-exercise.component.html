@@ -1,7 +1,8 @@
-<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-  <a class="navbar-brand col-sm-3 col-md-2 mr-0">
-    <img class="brand-logo" src="assets/gymlogo.png" alt="positronX.io Logo">
+<nav class="navbar navbar-dark fixed-top bg-dark p-0 shadow d-flex">
+  <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">
+    <img class="brand-logo" src="../../../assets/logo.jpg" alt="Logo">
   </a>
+  <h1 class="navbar-brand flex-grow-1">Train Me</h1>
 </nav>
 
 
@@ -9,17 +10,17 @@
 <div class="container-fluid">
   <div class="row">
 
-    <nav class="col-md-2 d-md-block bg-light sidebar">
+    <nav class="mainS col-md-2 d-md-block bg-light sidebar">
       <div class="sidebar-sticky">
         <ul class="nav flex-column">
           <li class="nav-item">
             <a class="nav-link" routerLink="/dashboard" routerLinkActive="active">
-              <i class="fas fa-user"></i>Exercícios
+              <i class="fa fa-child" aria-hidden="true"></i>Exercícios
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" routerLink="/register-exercise" routerLinkActive="active">
-              Adicionar Exercício
+              <i class="fa fa-plus" aria-hidden="true"></i>Adicionar Exercício
             </a>
           </li>
           <!-- Calling SignOut() Api from AuthService -->
@@ -79,12 +80,16 @@
                       formControlName="equipment" 
                       class="form-control" 
                     />
-        
-                    <label>imgId</label>
+                  
+                  <img class="img-perfil">
+                  <label for="imgId">Image</label>
                     <input 
-                      type="text" 
+                      type="file" 
                       formControlName="imgId" 
                       class="form-control" 
+                      accept=".png,.jpg"
+                      (change)="previewImage($event)"
+                      hidden
                     />
                   
               </div>
