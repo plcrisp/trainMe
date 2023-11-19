@@ -135,7 +135,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade200,
+      backgroundColor: Color.fromRGBO(28, 43, 69, 1),
       body: SafeArea(
         child: Form(
           key: formKey,
@@ -143,12 +143,12 @@ class _RegisterPageState extends State<RegisterPage> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  const SizedBox(height: 50),
                   //logo
                   Image.asset(
-                    'assets/images/Prep_Gym.png',
+                    'assets/images/logo.png',
+                    width: 200,
                   ),
-                  const SizedBox(height: 50),
+                  const SizedBox(height: 25),
                   //welcome back
                   Text(
                     'Seja bem vindo!',
@@ -195,9 +195,18 @@ class _RegisterPageState extends State<RegisterPage> {
                   const SizedBox(height: 10),
 
                   //sign in button
-                  Button(
-                    onTap: signUp,
-                    text: 'Register',
+                  SizedBox(
+                    width: 300,
+                    height: 60,
+                    child: ElevatedButton(
+                      onPressed: signUp,
+                      child: Text('Register'),
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Color.fromRGBO(18, 154, 194, 1),
+                          foregroundColor: Colors
+                              .black // Substitua 'Colors.red' pela cor que você deseja
+                          ),
+                    ),
                   ),
                   const SizedBox(height: 50),
                   //register now

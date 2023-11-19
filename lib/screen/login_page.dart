@@ -77,18 +77,19 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade200,
+      backgroundColor: Color.fromRGBO(28, 43, 69, 1),
       body: SafeArea(
         child: Form(
           key: formKey,
           child: Center(
             child: SingleChildScrollView(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const SizedBox(height: 50),
                   //logo
                   Image.asset(
-                    'assets/images/Prep_Gym.png',
+                    'assets/images/logo.png',
+                    width: 200,
                   ),
                   const SizedBox(height: 50),
                   //welcome back
@@ -99,7 +100,7 @@ class _LoginPageState extends State<LoginPage> {
                       fontSize: 16,
                     ),
                   ),
-                  const SizedBox(height: 25),
+                  const SizedBox(height: 15),
 
                   //username
                   MyTextField(
@@ -138,9 +139,18 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(height: 25),
 
                   //sign in button
-                  Button(
-                    onTap: signIn,
-                    text: "Sign in",
+                  SizedBox(
+                    width: 300,
+                    height: 60,
+                    child: ElevatedButton(
+                      onPressed: signIn,
+                      child: Text('Sign In'),
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Color.fromRGBO(18, 154, 194, 1),
+                          foregroundColor: Colors
+                              .black // Substitua 'Colors.red' pela cor que você deseja
+                          ),
+                    ),
                   ),
                   const SizedBox(height: 50),
                   //register now

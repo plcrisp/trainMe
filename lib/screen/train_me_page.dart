@@ -1,4 +1,5 @@
 import 'package:academia/auth/auth_page.dart';
+import 'package:academia/screen/exercises.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -15,10 +16,7 @@ final tabs = [
     color: Colors.white, // Substitua 'Colors.red' pela cor que você deseja
     child: Center(child: Text('Home', style: TextStyle(color: Colors.black))),
   ),
-  Container(
-    color: Colors.white, // Substitua 'Colors.green' pela cor que você deseja
-    child: Center(child: Text('Perfil', style: TextStyle(color: Colors.black))),
-  ),
+  Exercises(),
   Container(
     color: Colors.white, // Substitua 'Colors.blue' pela cor que você deseja
     child: Center(child: Text('Config', style: TextStyle(color: Colors.black))),
