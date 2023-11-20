@@ -19,11 +19,18 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.crudService.GetAllExercises().subscribe(res => {
+      console.log(res);
       this.Exercise = res.map(e => {
         return {
           eid: e.payload.doc.id,
           ...e.payload.doc.data() as Exercise
         } as Exercise;
+      });
+
+      this.Exercise.sort((a, b) => {
+        const groupA = a.primaryGroup.toUpperCase();
+        const groupB = b.primaryGroup.toUpperCase();
+        return groupA.localeCompare(groupB);
       });
     });
   }

@@ -139,6 +139,19 @@ label {
   border-radius: 10px;
 }
 
+.form-control2 {
+  width: 100%;
+  display: block;
+  padding: 10px;
+  padding-left: 15px;
+  border: 2px solid #e7e7e7;
+  outline: none;
+  font-size: 15px;
+  color: #444444;
+  background: #ffffff;
+  border-radius: 10px;
+}
+
 .formControl:focus {
   border: 2px solid #d3d3d6;
 }
@@ -532,6 +545,10 @@ label {
 }
 
 [role="main"] {
+  padding-top: 75px;
+}
+
+[role="main2"] {
   padding-top: 75px;
 }
 

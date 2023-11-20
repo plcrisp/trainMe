@@ -1,0 +1,34 @@
+.exercise-header {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .bar {
+    height: 0.3px;
+    background-color: #ddd;
+    margin-top: 0; /* Adiciona espaço entre o nome e a barra */
+    margin-bottom: 10px; /* Adiciona espaço entre a barra e as características */
+  }
+  
+  .exercise-list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .exercise-card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 10px;
+    width: calc(33.3333% - 20px);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  
+  .button-container {
+    margin-top: auto;
+    margin-left: 60%;
+  }
+  

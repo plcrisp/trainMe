@@ -1,8 +1,8 @@
 <nav class="navbar navbar-dark fixed-top bg-dark p-0 shadow d-flex">
   <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">
     <img class="brand-logo" src="../../../assets/logo.jpg" alt="Logo">
+    <h1 class="navbar-brand flex-grow-1">Train Me</h1>
   </a>
-  <h1 class="navbar-brand flex-grow-1">Train Me</h1>
 </nav>
 
 
@@ -34,22 +34,22 @@
     </nav>
 
     <!-- Main content -->
-    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <main role="main2" class="col-md-9 ml-sm-auto col-lg-10 px-4">
       <div class="inner-adjust">
 
         <div class="pt-3 pb-2 mb-3 border-bottom">
-          <h2 class="h2">Add Exercise</h2>
+          <h2 class="h2">Adicionar exercício</h2>
         </div>
         
         <form [formGroup]="exerciseForm" (ngSubmit)="submitExerciseData()" novalidate>
           <div class="row">
             <div class="col-lg-5 col-md-12 col-sm-12">
               <div class="row">
-                  <label>Name</label>
+                  <label>Nome</label>
                     <input
                       type="text"
                       formControlName="name"
-                      class="form-control"
+                      class="form-control2"
                       required
                     />
                               <!-- errors-->
@@ -60,41 +60,37 @@
                                 <sup>*</sup>O nome não deve ter menos de 2 caracteres
                               </p>
                 
-                  <label>Primary Group</label>
+                  <label>Músculo-alvo</label>
                     <input 
                       type="text" 
                       formControlName="primaryGroup" 
-                      class="form-control" 
+                      class="form-control2" 
                     />
         
-                  <label>Secondary Group</label>
+                  <label>Grupos auxiliares</label>
                     <input 
                       type="text" 
                       formControlName="secondaryGroup" 
-                      class="form-control" 
+                      class="form-control2" 
                     />
                 
-                  <label>Equipment</label>
+                  <label>Equipamento</label>
                     <input 
                       type="text" 
                       formControlName="equipment" 
-                      class="form-control" 
+                      class="form-control2" 
                     />
-                  
-                  <img class="img-perfil">
-                  <label for="imgId">Image</label>
+        
+                    <label>imgId</label>
                     <input 
-                      type="file" 
+                      type="text" 
                       formControlName="imgId" 
-                      class="form-control" 
-                      accept=".png,.jpg"
-                      (change)="previewImage($event)"
-                      hidden
+                      class="form-control2" 
                     />
                   
               </div>
             </div>
-              <div class="form-group text-right">
+              <div class="form-group2 text-right">
                 <button
                   type="button"
                   class="btn btn-secondary gap-right"
@@ -107,7 +103,7 @@
                   class="btn btn-success"
                   [disabled]="!exerciseForm.valid"
                 >
-                  Add Exercise
+                  Adicionar
                 </button>
               </div>
           </div>

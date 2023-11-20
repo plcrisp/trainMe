@@ -8,6 +8,7 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { environment } from '../environments/environment';
+import { StorageModule, provideStorage } from '@angular/fire/storage';
 
 // components
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -47,6 +48,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    StorageModule,
     AngularFireStorageModule,
     AngularFireDatabaseModule,
     AppRoutingModule,

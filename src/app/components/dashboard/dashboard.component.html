@@ -35,34 +35,32 @@
     <!-- Main content -->
     <main role="main" class="mainS col-md-9 ml-sm-auto col-lg-10 px-4">
       <div class="inner-adjust">
+    
+        <div class="exercise-list">
+    
+          <div *ngFor="let exercise of Exercise" class="exercise-card">
 
-        <table class="table">
-          <thead>
-          <tr>
-          <th scope="col">Name</th>
-          <th scope="col">Equipment</th>
-          <th scope="col">Primary Group</th>
-          <th scope="col">Secondary Group</th>
-          <th scope="col"></th>
-          </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let exercise of Exercise; let i = index">
-              <td>{{ exercise.name }}</td>
-              <td>{{ exercise.equipment }}</td>
-              <td>{{ exercise.primaryGroup }}</td>
-              <td>{{ exercise.secondaryGroup }}</td>
-              <td>
-                <span routerLink="/update-student/{{exercise.eid}}" class="btnDash1 btn-primary">Edit</span>
-                <span (click)="removeExercise(exercise)" class="btnDash1 btn-link">
-                  <i class="fa fa-trash" aria-hidden="true"></i>
-                </span>
-                &nbsp;
-              </td>
-            </tr>
-          </tbody>
-        </table>
+            <div class="exercise-header">
+              <h4>{{ exercise.name }} ({{ exercise.equipment }})</h4>
+            </div>
 
+            <div class="bar"></div>
+
+            <p><strong>Músculo-alvo: </strong> {{ exercise.primaryGroup }}</p>
+
+            <p *ngIf="exercise.secondaryGroup"><strong>Grupo auxiliar:</strong> {{ exercise.secondaryGroup }}</p>
+
+            <div class="button-container">
+              <span routerLink="/update-student/{{exercise.eid}}" class="btnDash1 btn-primary">Edit</span>
+              <span (click)="removeExercise(exercise)" class="btnDash1 btn-link">
+                <i class="fa fa-trash" aria-hidden="true"></i>
+              </span>
+            </div>
+
+          </div>
+    
+        </div>
+    
       </div>
     </main>
 
