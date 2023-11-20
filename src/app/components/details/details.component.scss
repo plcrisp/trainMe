@@ -1,0 +1,44 @@
+.card {
+    margin-top: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    background-color: #1D2D47;
+    color: #fff;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    border-radius: 8px 8px 0 0;
+    h2{
+        margin-left: 10px;
+        margin-top: 5px;
+    }
+}
+
+.card-body {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.exercise-info {
+    flex-grow: 1;
+}
+
+.exercise-info p {
+    margin-bottom: 10px;
+}
+
+.exercise-image {
+    max-width: 200px;
+    text-align: right;
+    margin-right: 40px;
+}
+
+.exercise-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+}

@@ -8,7 +8,6 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { environment } from '../environments/environment';
-import { StorageModule, provideStorage } from '@angular/fire/storage';
 
 // components
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -29,6 +28,8 @@ import { AuthService } from './shared/services/auth.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DetailsComponent } from './components/details/details.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
@@ -42,13 +43,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AddExerciseComponent,
     EditExerciseComponent,
     ExerciseListComponent,
+    DetailsComponent,
   ],
   imports: [
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
-    StorageModule,
     AngularFireStorageModule,
     AngularFireDatabaseModule,
     AppRoutingModule,
@@ -56,6 +57,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ToastrModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
+    FontAwesomeModule,
   ],
   providers: [AuthService],
   bootstrap: [AppComponent],

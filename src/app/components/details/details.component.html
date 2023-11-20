@@ -1,0 +1,67 @@
+<nav class="navbar navbar-dark fixed-top bg-dark p-0 shadow d-flex">
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">
+      <img class="brand-logo" src="../../../assets/logo.jpg" alt="Logo">
+      <h1 class="navbar-brand flex-grow-1">Train Me</h1>
+    </a>
+  </nav>
+  
+  
+  
+  <div class="container-fluid">
+    <div class="row">
+  
+      <nav class="mainS col-md-2 d-md-block bg-light sidebar">
+        <div class="sidebar-sticky">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/dashboard" routerLinkActive="active">
+                <i class="fa fa-child" aria-hidden="true"></i>Exercícios
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/register-exercise" routerLinkActive="active">
+                <i class="fa fa-plus" aria-hidden="true"></i>Adicionar Exercício
+              </a>
+            </li>
+            <!-- Calling SignOut() Api from AuthService -->
+            <li class="nav-item">
+              <a class="nav-link" (click)="authService.SignOut()">
+                <i class="fas fa-sign-out-alt"></i>Sair
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+  
+      <!-- Main content -->
+      <main role="main2" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+        <div class="inner-adjust">
+    
+            <!-- Main content -->
+            <main role="main2" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                <div class="inner-adjust">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>{{ exercise.name }}</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="exercise-info">
+                                <p><strong>Equipamento:</strong> {{ exercise.equipment }}</p>
+                                <p><strong>Músculo-alvo:</strong> {{ exercise.primaryGroup }}</p>
+                                <p><strong>Grupos auxiliares:</strong> {{ exercise.secondaryGroup }}</p>
+                            </div>
+                            <div class="exercise-image">
+                                <img src="../../../assets/legPress.jpg" alt="{{ exercise.name }}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+    
+        </div>
+    </main>
+    
+  
+    </div>
+</div>

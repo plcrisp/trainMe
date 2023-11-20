@@ -11,6 +11,7 @@ import { EditExerciseComponent } from './components/edit-exercise/edit-exercise.
 
 // route guard
 import { AuthGuard } from './shared/guard/auth.guard';
+import { DetailsComponent } from './components/details/details.component';
 
 
 const routes: Routes = [
@@ -23,6 +24,8 @@ const routes: Routes = [
   { path: 'edit-exercise/:id', component: EditExerciseComponent, canActivate: [AuthGuard] },
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'verify-email-address', component: VerifyEmailComponent },
+  { path: 'exercise-details/:eid', component: DetailsComponent },
+  
 ];
 
 @NgModule({

@@ -26,3 +26,34 @@ label{
     float: left;
     width: 100%;
 }
+
+form{
+    margin-bottom: 20px;
+}
+
+.select-container{
+    display: flex;
+    justify-content: left;
+    position: relative;
+    min-width: 75px;
+    height: 35px;
+    margin-bottom: 20px;
+}
+
+.select-box{
+    border: none;
+    appearance: none;
+    padding: 0 30px 0 15px;
+    width: 40%;
+    
+    background-color: #1D2D47;
+    font-size: 16px;
+    font-weight: 300;
+    border-radius: 10px;
+    color: white;
+    option{
+        background-color: white;
+        color: black;
+        font-weight: 300;
+    }
+}

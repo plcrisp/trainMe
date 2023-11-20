@@ -30,7 +30,7 @@ export class CrudService {
 
   // Fetch Single exercise Object
   GetExercise(eid: string) {
-    return this.afs.doc(`users/${eid}`).get();
+    return this.afs.doc(`exercises/${eid}`).get();
   }
 
 

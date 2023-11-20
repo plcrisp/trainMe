@@ -38,7 +38,7 @@
     
         <div class="exercise-list">
     
-          <div *ngFor="let exercise of Exercise" class="exercise-card">
+          <a *ngFor="let exercise of Exercise" class="exercise-card" [routerLink]="['/exercise-details', exercise.eid]">
 
             <div class="exercise-header">
               <h4>{{ exercise.name }} ({{ exercise.equipment }})</h4>
@@ -57,7 +57,7 @@
               </span>
             </div>
 
-          </div>
+          </a>
     
         </div>
     

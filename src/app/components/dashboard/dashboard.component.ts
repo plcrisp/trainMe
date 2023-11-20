@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../shared/services/auth.service';
 import { CrudService } from 'src/app/shared/services/crud.service';
 import { Exercise } from 'src/app/shared/services/exercise';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,7 +15,7 @@ export class DashboardComponent implements OnInit {
   Exercise: Exercise[];
 
 
-  constructor(private crudService: CrudService, public authService: AuthService) {}
+  constructor(private crudService: CrudService, public authService: AuthService, private route: ActivatedRoute) {}
 
 
 
