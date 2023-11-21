@@ -1,6 +1,6 @@
 import 'package:academia/auth/auth_page.dart';
 import 'package:academia/componentes/MySearchDelegate.dart';
-import 'package:academia/screen/exercises.dart';
+import 'package:academia/screen/exercises_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
