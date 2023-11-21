@@ -21,10 +21,10 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'register-exercise', component: AddExerciseComponent, canActivate: [AuthGuard] },
   { path: 'view-exercises', component: ExerciseListComponent, canActivate: [AuthGuard] },
-  { path: 'edit-exercise/:id', component: EditExerciseComponent, canActivate: [AuthGuard] },
+  { path: 'edit-exercise/:eid', component: EditExerciseComponent, canActivate: [AuthGuard] },
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'verify-email-address', component: VerifyEmailComponent },
-  { path: 'exercise-details/:eid', component: DetailsComponent },
+  { path: 'exercise-details/:eid', component: DetailsComponent, canActivate: [AuthGuard] },
   
 ];
 

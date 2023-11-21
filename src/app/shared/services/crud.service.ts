@@ -42,8 +42,8 @@ export class CrudService {
 
 
 
-  async updateExerciseData(exercise: Exercise, uid: string) {
-    const exerciseRef = this.afs.collection(`users/`);
+  async updateExerciseData( uid: string, exercise: Exercise) {
+    const exerciseRef = this.afs.collection(`exercises/`);
 
     await exerciseRef.doc(uid).update({
       name: exercise.name,
@@ -51,9 +51,7 @@ export class CrudService {
       secondaryGroup: exercise.secondaryGroup,
       imgId: exercise.imgId,
       equipment: exercise.equipment
-    }).then(() => {
-      window.alert('Dados atualizados');
-    });
+    })
   }
 
   SetExerciseData(eid: string, exercise: any) {

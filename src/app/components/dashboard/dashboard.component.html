@@ -38,26 +38,30 @@
     
         <div class="exercise-list">
     
-          <a *ngFor="let exercise of Exercise" class="exercise-card" [routerLink]="['/exercise-details', exercise.eid]">
-
+          <div *ngFor="let exercise of Exercise" class="exercise-card">
+    
             <div class="exercise-header">
-              <h4>{{ exercise.name }} ({{ exercise.equipment }})</h4>
+              <h4>
+                <a [routerLink]="['/exercise-details', exercise.eid]">
+                  {{ exercise.name }} ({{ exercise.equipment }})
+                </a>
+              </h4>
             </div>
-
+    
             <div class="bar"></div>
-
+    
             <p><strong>Músculo-alvo: </strong> {{ exercise.primaryGroup }}</p>
-
+    
             <p *ngIf="exercise.secondaryGroup"><strong>Grupo auxiliar:</strong> {{ exercise.secondaryGroup }}</p>
-
+    
             <div class="button-container">
-              <span routerLink="/update-student/{{exercise.eid}}" class="btnDash1 btn-primary">Edit</span>
+              <span [routerLink]="['/edit-exercise', exercise.eid]" class="btnDash1 btn-primary">Editar</span>
               <span (click)="removeExercise(exercise)" class="btnDash1 btn-link">
                 <i class="fa fa-trash" aria-hidden="true"></i>
               </span>
             </div>
-
-          </a>
+    
+          </div>
     
         </div>
     
