@@ -4,6 +4,8 @@ import { CrudService } from 'src/app/shared/services/crud.service';
 import { Exercise } from 'src/app/shared/services/exercise';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { ActivatedRoute } from '@angular/router';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -38,9 +40,35 @@ export class DashboardComponent implements OnInit {
   }
   
 
+  //removeExercise(Exercise){
+ //   if(confirm("Tem certeza que deseja deletar "+ Exercise.name)){
+  //    this.crudService.deleteExercise(Exercise.eid);
+  //  }
+ // }
+
   removeExercise(Exercise){
-    if(confirm("Tem certeza que deseja deletar "+ Exercise.name)){
-      this.crudService.deleteExercise(Exercise.eid);
-    }
+    Swal.fire({
+      title: "Tem certeza?",
+      text: "Você não conseguirá reverter isso!",
+      icon: "warning",
+      color: '#FFF',
+      background: '#1D2D47',
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Remover"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.crudService.deleteExercise(Exercise.eid);
+        Swal.fire({
+          background: '#1D2D47',
+          color: '#FFF',
+          title: "Removido!",
+          confirmButtonColor: '#009688',
+          text: `${Exercise.name} removido(a) com sucesso!`,
+          icon: "success"
+        });
+      }
+    });
   }
 }

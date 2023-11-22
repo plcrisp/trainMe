@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { CrudService } from 'src/app/shared/services/crud.service';
 import { Exercise } from 'src/app/shared/services/exercise';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-edit-exercise',
@@ -79,9 +80,23 @@ export class EditExerciseComponent {
 
   submitExerciseData() {
     this.crudService.updateExerciseData(this.exerciseId, this.exerciseForm.value);
-    window.alert(`${this.exercise.name} modificado(a) com sucesso!`);
     this.ResetForm();
     this.router.navigate(['/dashboard']);
   }
+
+  alert(){
+    Swal.fire({
+        title: `${this.exercise.name} editado(a) com sucesso!`,
+        width: 600,
+        padding: '3em',
+        color: '#FFF',
+        background: '#1D2D47',
+        confirmButtonColor: '#009688',
+        backdrop: `
+          rgba(41, 51, 92,0.4)
+        `
+
+    })
+    }
 
 }

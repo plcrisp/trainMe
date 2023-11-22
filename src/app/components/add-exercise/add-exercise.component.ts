@@ -3,6 +3,7 @@ import { CrudService } from '../../shared/services/crud.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-add-exercise',
@@ -56,7 +57,21 @@ export class AddExerciseComponent implements OnInit {
   submitExerciseData() {
     let eid = new Date().getTime().toString(); 
     this.crudApi.SetExerciseData(eid, this.exerciseForm.value);
-    window.alert('Exercício adicionado com sucesso!');
     this.ResetForm();
   }
+
+  alert(){
+    Swal.fire({
+        title: 'Exercício adicionado com sucesso!',
+        width: 600,
+        padding: '3em',
+        color: '#FFF',
+        background: '#1D2D47',
+        confirmButtonColor: '#009688',
+        backdrop: `
+          rgba(41, 51, 92,0.4)
+        `
+
+    })
+    }
 }
