@@ -66,7 +66,7 @@ export class AddExerciseComponent implements OnInit {
 
   alert(){
     Swal.fire({
-        title: 'Exercício adicionado com sucesso!',
+        title: `${this.exerciseForm.value.name} adicionado(a) com sucesso!`,
         width: 600,
         padding: '3em',
         color: '#FFF',
