@@ -12,6 +12,7 @@ class ExercisesItens {
   String name;
   String primaryGroup;
   String secondaryGroup;
+  String obs;
 
   ExercisesItens({
     required this.eid,
@@ -20,6 +21,7 @@ class ExercisesItens {
     required this.name,
     required this.primaryGroup,
     required this.secondaryGroup,
+    required this.obs,
   });
 
   factory ExercisesItens.fromJson(Map<String, dynamic> json) => ExercisesItens(
@@ -29,6 +31,7 @@ class ExercisesItens {
         name: json["name"],
         primaryGroup: json["primaryGroup"],
         secondaryGroup: json["secondaryGroup"],
+        obs: json["obs"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -38,5 +41,6 @@ class ExercisesItens {
         "name": name,
         "primaryGroup": primaryGroup,
         "secondaryGroup": secondaryGroup,
+        "obs": obs,
       };
 }

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 class MySquare extends StatelessWidget {
-  final String image;
+  final Widget image;
   final String name;
+  final String equipment;
   final String primaryGroup;
   final String secondaryGroup;
   final onTap;
@@ -11,6 +12,7 @@ class MySquare extends StatelessWidget {
     required this.image,
     required this.onTap,
     required this.name,
+    required this.equipment,
     required this.primaryGroup,
     required this.secondaryGroup,
   });
@@ -29,12 +31,12 @@ class MySquare extends StatelessWidget {
             child: Container(
               child: Row(
                 children: [
-                  SizedBox(
-                    height: 150,
-                    width: 150,
-                    child: Image.asset(
-                      image,
-                      fit: BoxFit.cover,
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SizedBox(
+                      height: 100,
+                      width: 100,
+                      child: image,
                     ),
                   ),
                   Expanded(
@@ -44,14 +46,14 @@ class MySquare extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(name,
+                          Text(name + ' (' + equipment + ')',
                               style: TextStyle(fontWeight: FontWeight.bold)),
                           Text(
                             primaryGroup + ' / ' + secondaryGroup,
                             style: TextStyle(fontWeight: FontWeight.w400),
                           ),
                           Text(
-                            'sexo virtual 123',
+                            'Saiba mais...',
                             style: TextStyle(fontWeight: FontWeight.w200),
                           )
                         ],

@@ -1,9 +1,14 @@
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:academia/auth/auth_page.dart';
 import 'package:academia/componentes/MySearchDelegate.dart';
 import 'package:academia/screen/exercises_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:image_picker/image_picker.dart';
 
 class TrainMe extends StatefulWidget {
   const TrainMe({super.key});
@@ -34,9 +39,9 @@ class _TrainMeState extends State<TrainMe> {
         context, MaterialPageRoute(builder: (context) => AuthPage()));
   }
 
+  final _user = FirebaseAuth.instance.currentUser;
+  bool _isLoading = false;
   @override
-  final _user = FirebaseAuth.instance.currentUser?.displayName;
-  final _email = FirebaseAuth.instance.currentUser?.email;
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -70,23 +75,61 @@ class _TrainMeState extends State<TrainMe> {
                     accountName: Padding(
                       padding: EdgeInsets.only(top: 30.0),
                       child: Text(
-                        _user!,
+                        _user?.displayName ?? 'Usuário',
                         style: TextStyle(fontSize: 20),
                       ),
                     ),
                     accountEmail: Padding(
                       padding: EdgeInsets.only(bottom: 0.0),
                       child: Text(
-                        _email!,
+                        _user?.email ?? 'Email',
                         style: TextStyle(fontSize: 20),
                       ),
                     ),
-                    currentAccountPicture: CircleAvatar(
-                      backgroundColor: Colors.white,
-                      child: Text(
-                        "N",
-                        style: TextStyle(fontSize: 40.0),
-                      ),
+                    currentAccountPicture: GestureDetector(
+                      onTap: () async {
+                        setState(() {
+                          _isLoading = true;
+                        });
+                        final ImagePicker _picker = ImagePicker();
+                        XFile? image =
+                            await _picker.pickImage(source: ImageSource.camera);
+
+                        if (image != null) {
+                          final String filePath = image.path;
+                          File imageFile = File(filePath);
+
+                          try {
+                            // Upload to Firebase storage
+                            final ref = FirebaseStorage.instance
+                                .ref('/user_image/${_user?.uid}.jpg');
+                            await ref.putFile(imageFile);
+
+                            // Get URL
+                            final url = await ref.getDownloadURL();
+
+                            // Update user profile
+                            // Update user profile
+                            await _user?.updatePhotoURL(url);
+                            _user?.reload().then((_) {
+                              setState(() {
+                                _isLoading = false;
+                              });
+                            });
+                          } catch (e) {
+                            print('Failed to upload image: $e');
+                          }
+                        }
+                      },
+                      child: _isLoading
+                          ? CircularProgressIndicator()
+                          : CircleAvatar(
+                              radius: 64,
+                              backgroundColor: Colors.white,
+                              backgroundImage: NetworkImage(FirebaseAuth
+                                      .instance.currentUser?.photoURL ??
+                                  'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'),
+                            ),
                     ),
                   ),
                 ],
@@ -110,8 +153,8 @@ class _TrainMeState extends State<TrainMe> {
       ),
       body: tabs[currentIndex],
       bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          color: const Color.fromRGBO(28, 43, 69, 1),
+        decoration: const BoxDecoration(
+          color: Color.fromRGBO(28, 43, 69, 1),
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(8),
             topRight: Radius.circular(8),

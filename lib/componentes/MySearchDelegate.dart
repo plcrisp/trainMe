@@ -28,6 +28,29 @@ class MySearchDelegate extends SearchDelegate {
           if (!snapshot.hasData) {
             return Center(child: CircularProgressIndicator());
           } else {
+            if ((snapshot.data!.docs
+                    .where((QueryDocumentSnapshot<Object?> element) =>
+                        element['name']
+                            .toString()
+                            .toLowerCase()
+                            .contains(query.toLowerCase()))
+                    .isEmpty) &&
+                (snapshot.data!.docs
+                    .where((QueryDocumentSnapshot<Object?> element) =>
+                        element['primaryGroup']
+                            .toString()
+                            .toLowerCase()
+                            .contains(query.toLowerCase()))
+                    .isEmpty) &&
+                (snapshot.data!.docs
+                    .where((QueryDocumentSnapshot<Object?> element) =>
+                        element['secondaryGroup']
+                            .toString()
+                            .toLowerCase()
+                            .contains(query.toLowerCase()))
+                    .isEmpty)) {
+              return Center(child: Text('Nenhum resultado encontrado'));
+            }
             return ListView(
               children: [
                 ...snapshot.data!.docs
@@ -39,8 +62,12 @@ class MySearchDelegate extends SearchDelegate {
                     .map((e) {
                   return MySquare(
                     onTap: () {},
-                    image: 'assets/images/logo.png',
+                    image: Image.network(
+                      e['imgId'],
+                      fit: BoxFit.cover,
+                    ),
                     name: e['name'],
+                    equipment: e['equipment'],
                     primaryGroup: e['primaryGroup'],
                     secondaryGroup: e['secondaryGroup'],
                   );
@@ -54,8 +81,12 @@ class MySearchDelegate extends SearchDelegate {
                     .map((e) {
                   return MySquare(
                     onTap: () {},
-                    image: 'assets/images/logo.png',
+                    image: Image.network(
+                      e['imgId'],
+                      fit: BoxFit.cover,
+                    ),
                     name: e['name'],
+                    equipment: e['equipment'],
                     primaryGroup: e['primaryGroup'],
                     secondaryGroup: e['secondaryGroup'],
                   );
@@ -69,8 +100,12 @@ class MySearchDelegate extends SearchDelegate {
                     .map((e) {
                   return MySquare(
                     onTap: () {},
-                    image: 'assets/images/logo.png',
+                    image: Image.network(
+                      e['imgId'],
+                      fit: BoxFit.cover,
+                    ),
                     name: e['name'],
+                    equipment: e['equipment'],
                     primaryGroup: e['primaryGroup'],
                     secondaryGroup: e['secondaryGroup'],
                   );

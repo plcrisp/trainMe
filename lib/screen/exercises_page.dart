@@ -11,7 +11,44 @@ class Exercises extends StatefulWidget {
 }
 
 class _ExercisesState extends State<Exercises> {
-  //documents IDs
+  void showMoreInfo(ExercisesItens exercise) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
+          backgroundColor: Colors.grey[200],
+          title: Text(exercise.name, textAlign: TextAlign.center),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                SizedBox(
+                  height: 100,
+                  width: 100,
+                  child: Image.network(
+                    exercise.imgId,
+                    fit: BoxFit.contain,
+                  ),
+                ),
+                Text(exercise.obs),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Close'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   List<ExercisesItens> exerciseRecords = [];
 
   @override
@@ -36,6 +73,7 @@ class _ExercisesState extends State<Exercises> {
             name: e['name'],
             primaryGroup: e['primaryGroup'],
             secondaryGroup: e['secondaryGroup'],
+            obs: e['obs'],
           ),
         )
         .toList();
@@ -51,9 +89,13 @@ class _ExercisesState extends State<Exercises> {
       itemCount: exerciseRecords.length,
       itemBuilder: (context, index) {
         return MySquare(
-          onTap: () {},
-          image: 'assets/images/logo.png',
+          onTap: () => showMoreInfo(exerciseRecords[index]),
+          image: Image.network(
+            exerciseRecords[index].imgId,
+            fit: BoxFit.cover,
+          ),
           name: exerciseRecords[index].name,
+          equipment: exerciseRecords[index].equipment,
           primaryGroup: exerciseRecords[index].primaryGroup,
           secondaryGroup: exerciseRecords[index].secondaryGroup,
         );

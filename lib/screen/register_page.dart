@@ -1,4 +1,3 @@
-import 'package:academia/componentes/button.dart';
 import 'package:academia/componentes/my_text_field.dart';
 import 'package:academia/screen/train_me_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -94,21 +93,37 @@ class _RegisterPageState extends State<RegisterPage> {
     );
 
     if (formKey.currentState!.validate()) {
-      UserCredential credential =
-          await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: emailController.text.trim(),
-        password: passwordController.text.trim(),
-      );
-      await credential.user
-          ?.updateDisplayName(displayNameController.text.trim());
-      await credential.user?.reload();
-    }
+      try {
+        UserCredential credential =
+            await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: emailController.text.trim(),
+          password: passwordController.text.trim(),
+        );
+        await credential.user
+            ?.updateDisplayName(displayNameController.text.trim());
+        await credential.user?.reload();
 
-    Navigator.of(context).pop();
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => TrainMe()),
-    );
+        Navigator.of(context).pop();
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => TrainMe()),
+        );
+      } catch (e) {
+        Navigator.of(context).pop();
+        print('Error: $e');
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            padding: EdgeInsets.all(10),
+            backgroundColor: Colors.red,
+            content:
+                Text('Informações fornecidas já cadastradas ou inválidas.'),
+          ),
+        );
+        // Você pode mostrar um diálogo ou snackbar aqui para informar o usuário sobre o erro
+      }
+    } else {
+      Navigator.of(context).pop();
+    }
   }
 
   //data user

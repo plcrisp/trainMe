@@ -52,19 +52,53 @@ class _LoginPageState extends State<LoginPage> {
   Future signIn() async {
     //loading page
     showDialog(
-        context: context,
-        builder: (context) => Center(
-              child: CircularProgressIndicator(),
-            ));
+      context: context,
+      builder: (context) {
+        return Center(
+          child: CircularProgressIndicator(),
+        );
+      },
+    );
 
     if (formKey.currentState!.validate()) {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: emailController.text.trim(),
-        password: passwordController.text.trim(),
-      );
+      try {
+        await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: emailController.text.trim(),
+          password: passwordController.text.trim(),
+        );
+        Navigator.of(context).pop(); // Feche o diálogo primeiro
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => TrainMe()),
+        );
+      } on FirebaseAuthException catch (e) {
+        Navigator.of(context).pop(); // Feche o diálogo em caso de erro
+        if (e.code == 'user-not-found') {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Não existe usuário com o email fornecido.'),
+            ),
+          );
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              backgroundColor: Colors.red,
+              elevation: 10,
+              content: Text('Informações fornecidas não existentes.'),
+            ),
+          );
+        }
+      } catch (e) {
+        Navigator.of(context).pop(); // Feche o diálogo em caso de erro
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Erro'),
+          ),
+        );
+      }
+    } else {
+      Navigator.of(context).pop(); // Feche o diálogo se a validação falhar
     }
-    Navigator.of(context).pop();
-    Navigator.push(context, MaterialPageRoute(builder: (context) => TrainMe()));
   }
 
   @override
