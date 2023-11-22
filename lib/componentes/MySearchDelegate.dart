@@ -1,3 +1,4 @@
+import 'package:academia/componentes/exercises.dart';
 import 'package:academia/componentes/square.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,44 @@ class MySearchDelegate extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
+    void showMoreInfoInResults(ExercisesItens exercise) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15),
+            ),
+            backgroundColor: Colors.grey[200],
+            title: Text(exercise.name, textAlign: TextAlign.center),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  SizedBox(
+                    height: 100,
+                    width: 100,
+                    child: Image.network(
+                      exercise.imgId,
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                  Text(exercise.obs),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: Text('Close'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+
     return StreamBuilder<QuerySnapshot>(
         stream: _exercises.snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -60,16 +99,15 @@ class MySearchDelegate extends SearchDelegate {
                             .toLowerCase()
                             .contains(query.toLowerCase()))
                     .map((e) {
+                  ExercisesItens exercise =
+                      ExercisesItens.fromJson(e.data() as Map<String, dynamic>);
                   return MySquare(
-                    onTap: () {},
-                    image: Image.network(
-                      e['imgId'],
-                      fit: BoxFit.cover,
-                    ),
+                    image: e['imgId'],
                     name: e['name'],
                     equipment: e['equipment'],
                     primaryGroup: e['primaryGroup'],
                     secondaryGroup: e['secondaryGroup'],
+                    obs: e['obs'],
                   );
                 }),
                 ...snapshot.data!.docs
@@ -80,15 +118,12 @@ class MySearchDelegate extends SearchDelegate {
                             .contains(query.toLowerCase()))
                     .map((e) {
                   return MySquare(
-                    onTap: () {},
-                    image: Image.network(
-                      e['imgId'],
-                      fit: BoxFit.cover,
-                    ),
+                    image: e['imgId'],
                     name: e['name'],
                     equipment: e['equipment'],
                     primaryGroup: e['primaryGroup'],
                     secondaryGroup: e['secondaryGroup'],
+                    obs: e['obs'],
                   );
                 }),
                 ...snapshot.data!.docs
@@ -99,15 +134,12 @@ class MySearchDelegate extends SearchDelegate {
                             .contains(query.toLowerCase()))
                     .map((e) {
                   return MySquare(
-                    onTap: () {},
-                    image: Image.network(
-                      e['imgId'],
-                      fit: BoxFit.cover,
-                    ),
+                    image: e['imgId'],
                     name: e['name'],
                     equipment: e['equipment'],
                     primaryGroup: e['primaryGroup'],
                     secondaryGroup: e['secondaryGroup'],
+                    obs: e['obs'],
                   );
                 }),
               ],
@@ -127,6 +159,7 @@ class MySearchDelegate extends SearchDelegate {
             final List<DocumentSnapshot> documents = snapshot.data!.docs;
             return ListView(
               children: documents
+                  .take(5)
                   .map((doc) => ListTile(
                         title: Text(doc['name']),
                         onTap: () {
