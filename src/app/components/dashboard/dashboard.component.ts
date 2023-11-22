@@ -15,13 +15,15 @@ import Swal from 'sweetalert2';
 
 export class DashboardComponent implements OnInit {
   Exercise: Exercise[];
-
+  exercisesToShow: number = 9;
 
   constructor(private crudService: CrudService, public authService: AuthService, private route: ActivatedRoute) {}
 
-
-
   ngOnInit() {
+    this.loadExercises();
+  }
+
+  loadExercises() {
     this.crudService.GetAllExercises().subscribe(res => {
       console.log(res);
       this.Exercise = res.map(e => {
@@ -38,6 +40,11 @@ export class DashboardComponent implements OnInit {
       });
     });
   }
+
+  loadMoreExercises() {
+    this.exercisesToShow += 9;
+  }
+
   
 
   //removeExercise(Exercise){

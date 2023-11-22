@@ -16,6 +16,7 @@ import {
 import { Firestore, deleteDoc, doc, getFirestore } from 'firebase/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 
+
 @Injectable({
   providedIn: 'root',
 })
@@ -34,7 +35,6 @@ export class CrudService {
   }
 
 
-
   // Fetch exercise List
   GetAllExercises() {
     return this.afs.collection("exercises").snapshotChanges();
@@ -50,7 +50,8 @@ export class CrudService {
       primaryGroup: exercise.primaryGroup,
       secondaryGroup: exercise.secondaryGroup,
       imgId: exercise.imgId,
-      equipment: exercise.equipment
+      equipment: exercise.equipment,
+      obs: exercise.obs
     })
   }
 
@@ -65,7 +66,8 @@ export class CrudService {
       primaryGroup: exercise.primaryGroup,
       secondaryGroup: exercise.secondaryGroup,
       imgId: exercise.imgId,
-      equipment: exercise.equipment
+      equipment: exercise.equipment,
+      obs: exercise.obs
     };
 
     return exerciseRef.set(exerciseData, {

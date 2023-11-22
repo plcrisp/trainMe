@@ -41,7 +41,8 @@ export class EditExerciseComponent {
           equipment: this.exercise.equipment,
           secondaryGroup: this.exercise.secondaryGroup,
           primaryGroup: this.exercise.primaryGroup,
-          imgId: this.exercise.imgId
+          imgId: this.exercise.imgId,
+          obs: this.exercise.obs
         });
       });
     });
@@ -56,6 +57,7 @@ export class EditExerciseComponent {
       secondaryGroup: [''],
       primaryGroup: ['', [Validators.required, Validators.minLength(2)]],
       imgId: ['', [Validators.required, Validators.minLength(2)]],
+      obs: ['', [Validators.required, Validators.minLength(2)]],
     });
   }
   get name() {
@@ -72,6 +74,9 @@ export class EditExerciseComponent {
   }
   get imgId() {
     return this.exerciseForm.get('imgId');
+  }
+  get obs() {
+    return this.exerciseForm.get('obs');
   }
 
   ResetForm() {

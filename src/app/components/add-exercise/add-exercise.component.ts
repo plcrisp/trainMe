@@ -32,6 +32,7 @@ export class AddExerciseComponent implements OnInit {
       secondaryGroup: [''],
       primaryGroup: ['', [Validators.required, Validators.minLength(2)]],
       imgId: ['', [Validators.required, Validators.minLength(2)]],
+      obs: ['', [Validators.required, Validators.minLength(2)]],
     });
   }
   get name() {
@@ -48,6 +49,9 @@ export class AddExerciseComponent implements OnInit {
   }
   get imgId() {
     return this.exerciseForm.get('imgId');
+  }
+  get obs() {
+    return this.exerciseForm.get('obs');
   }
 
   ResetForm() {

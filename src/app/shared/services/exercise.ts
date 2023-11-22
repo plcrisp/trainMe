@@ -5,4 +5,5 @@ export interface Exercise {
     primaryGroup: string;
     secondaryGroup: string;
     imgId: string;
+    obs: string;
 }
