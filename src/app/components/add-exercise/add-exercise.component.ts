@@ -19,7 +19,7 @@ export class AddExerciseComponent implements OnInit {
     public toastr: ToastrService,
     public authService: AuthService,
   ) {}
-
+ 
   ngOnInit() {
     this.crudApi.GetAllExercises();
     this.exercisForm();
