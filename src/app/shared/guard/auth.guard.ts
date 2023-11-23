@@ -37,9 +37,11 @@ export class AuthGuard {
         userDB = user.data();
         if (this.authService.isLoggedIn === false || userDB.admUser === false) {
           this.router.navigate(['sign-in']);
+          window.alert("Você não é um usuário administrador!");
           return false;
         }
         return true;
+
       }));
   }
 }
